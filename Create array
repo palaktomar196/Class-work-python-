@@ -1,0 +1,7 @@
+# to create an array
+import numpy as np
+
+# creating array
+data = np.array((48, 'python', 56))
+
+print(data)
