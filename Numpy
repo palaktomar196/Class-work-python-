@@ -1,0 +1,9 @@
+# to create an array
+import numpy as np
+
+# to create array
+variable = np.array([20,30,40,70,90])
+
+print(variable)  
+
+
