@@ -1,0 +1,40 @@
+category_sales = {}
+highest_product = ""
+highest_sale = 0
+
+try:
+    with open("sales.txt", "r") as file:
+        for line in file:
+            try:
+                data = line.strip().split(',')
+
+                if len(data) != 4:
+                    raise ValueError("Invalid row")
+
+                product = data[0]
+                category = data[1]
+                price = float(data[2])
+                quantity = int(data[3])
+
+                total_sale = price * quantity
+
+                if category in category_sales:
+                    category_sales[category] += total_sale
+                else:
+                    category_sales[category] = total_sale
+
+                if total_sale > highest_sale:
+                    highest_sale = total_sale
+                    highest_product = product
+
+            except ValueError:
+                print("Invalid row skipped:", line.strip())
+
+    print("Total Sales Per Category:")
+    for category, sale in category_sales.items():
+        print(category, ":", sale)
+
+    print("Highest Selling Product:", highest_product, "-", highest_sale)
+
+except FileNotFoundError:
+    print("Sales file not found")
