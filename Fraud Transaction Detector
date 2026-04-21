@@ -1,0 +1,32 @@
+transactions = [
+    {"user": "A", "amount": 5000, "time": 1},
+    {"user": "A", "amount": 12000, "time": 2},
+    {"user": "B", "amount": 3000, "time": 1},
+    {"user": "A", "amount": 7000, "time": 3},
+    {"user": "B", "amount": 15000, "time": 2}
+]
+
+threshold = 10000
+flagged = {}
+user_history = {}
+
+for t in transactions:
+    user = t["user"]
+    amount = t["amount"]
+    time = t["time"]
+
+    # Condition 1: Amount > threshold
+    if amount > threshold:
+        flagged.setdefault(user, []).append("High Amount Transaction")
+
+    # Condition 2: Multiple transactions in short time
+    if user in user_history:
+        if time - user_history[user] <= 1:
+            flagged.setdefault(user, []).append("Multiple Transactions Quickly")
+
+    user_history[user] = time
+
+# Output flagged transactions
+print("\nFraud Transactions:")
+for user, reasons in flagged.items():
+    print(user, ":", reasons)
