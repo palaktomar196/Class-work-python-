@@ -1,0 +1,62 @@
+def calculate_grade(percentage):
+    if percentage >= 90:
+        return 'A+'
+    elif percentage >= 75:
+        return 'A'
+    elif percentage >= 60:
+        return 'B'
+    elif percentage >= 50:
+        return 'C'
+    else:
+        return 'F'
+
+students = []
+
+try:
+    file = open("students.txt", "r")
+
+    for line in file:
+        try:
+            data = line.strip().split(",")
+
+            # Skip header
+            if data[0] == "id":
+                continue
+
+            id = data[0]
+            name = data[1]
+            m1 = int(data[2])
+            m2 = int(data[3])
+            m3 = int(data[4])
+
+            total = m1 + m2 + m3
+            percentage = total / 3
+
+            grade = calculate_grade(percentage)
+
+            student = {
+                "id": id,
+                "name": name,
+                "total": total,
+                "percentage": percentage,
+                "grade": grade
+            }
+
+            students.append(student)
+
+        except ValueError:
+            print("Invalid data found, skipping line:", line)
+
+    file.close()
+
+except FileNotFoundError:
+    print("File not found!")
+
+# Display results
+print("\nStudent Results:")
+for s in students:
+    print(s)
+
+# Find topper
+topper = max(students, key=lambda x: x["percentage"])
+print("\nTopper:", topper["name"], "-", topper["percentage"])
