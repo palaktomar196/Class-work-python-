@@ -1,0 +1,25 @@
+unique_logs = set()
+error_count = {}
+
+try:
+    file = open("log.txt", "r")
+
+    for line in file:
+        line = line.strip()
+        unique_logs.add(line)   # remove duplicates
+
+    file.close()
+
+    for log in unique_logs:
+        if "ERROR" in log:
+            if log in error_count:
+                error_count[log] += 1
+            else:
+                error_count[log] = 1
+
+    print("ERROR Log Counts:")
+    for log, count in error_count.items():
+        print(log, ":", count)
+
+except FileNotFoundError:
+    print("File not found!")
