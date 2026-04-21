@@ -1,0 +1,30 @@
+votes = [
+    ("U1", "Alice"),
+    ("U2", "Bob"),
+    ("U3", "Alice"),
+    ("U1", "Bob"),
+    ("U4", "Alice")
+]
+
+voted_users = set()
+vote_count = {}
+
+for user, candidate in votes:
+    if user in voted_users:
+        print("Duplicate vote ignored from", user)
+        continue
+
+    voted_users.add(user)
+
+    if candidate in vote_count:
+        vote_count[candidate] += 1
+    else:
+        vote_count[candidate] = 1
+
+winner = max(vote_count, key=vote_count.get)
+
+print("\nVote Count:")
+for candidate, count in vote_count.items():
+    print(candidate, ":", count)
+
+print("Winner:", winner)
