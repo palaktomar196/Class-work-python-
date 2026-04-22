@@ -1,0 +1,16 @@
+error_count = {}
+
+with open("errors.txt", "r") as file:
+    for line in file:
+        error = line.strip()
+
+        if error in error_count:
+            error_count[error] += 1
+        else:
+            error_count[error] = 1
+
+with open("summary.txt", "w") as file:
+    for error, count in error_count.items():
+        file.write(f"{error}: {count}\n")
+
+print("Summary written to file")
