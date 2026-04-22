@@ -1,0 +1,19 @@
+attendance = {}
+
+with open("attendance.txt", "r") as file:
+    for line in file:
+        emp_id, date, status = line.strip().split(',')
+
+        if emp_id not in attendance:
+            attendance[emp_id] = {"Present": 0, "Absent": 0}
+
+        attendance[emp_id][status] += 1
+
+for emp_id, record in attendance.items():
+    total = record["Present"] + record["Absent"]
+    percentage = (record["Present"] / total) * 100
+
+    print(emp_id, "Attendance:", percentage, "%")
+
+    if percentage < 75:
+        print(emp_id, "has low attendance")
