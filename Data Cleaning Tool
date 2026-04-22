@@ -1,0 +1,21 @@
+try:
+    with open("data.txt", "r") as file:
+        for line in file:
+            data = line.strip().split(',')
+
+            cleaned = []
+            for item in data:
+                item = item.strip()
+
+                if item != "":
+                    try:
+                        item = int(item)
+                    except:
+                        pass
+
+                    cleaned.append(item)
+
+            print(cleaned)
+
+except FileNotFoundError:
+    print("File not found")
