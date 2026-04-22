@@ -1,0 +1,26 @@
+class OverdraftError(Exception):
+    pass
+
+balance = 1000
+
+try:
+    with open("transactions.txt", "r") as file:
+        for line in file:
+            account, t_type, amount = line.strip().split(',')
+            amount = float(amount)
+
+            if t_type == "deposit":
+                balance += amount
+
+            elif t_type == "withdraw":
+                if amount > balance:
+                    raise OverdraftError("Insufficient balance")
+                balance -= amount
+
+    print("Final Balance:", balance)
+
+except OverdraftError as e:
+    print("Transaction Error:", e)
+
+except FileNotFoundError:
+    print("Transaction file not found")
