@@ -1,0 +1,10 @@
+exam1 = {"101": 60, "102": 70, "103": 80}
+exam2 = {"101": 75, "102": 65, "103": 90}
+
+for student in exam1:
+    old_marks = exam1[student]
+    new_marks = exam2[student]
+
+    if new_marks > old_marks:
+        improvement = ((new_marks - old_marks) / old_marks) * 100
+        print(student, "improved by", improvement, "%")
