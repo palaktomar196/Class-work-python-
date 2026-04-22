@@ -1,0 +1,17 @@
+students = [
+    ("Amit", "A"),
+    ("Riya", "B"),
+    ("Neha", "A"),
+    ("Raj", "B")
+]
+
+groups = {}
+
+for name, grade in students:
+    if grade not in groups:
+        groups[grade] = []
+
+    groups[grade].append(name)
+
+for grade, names in groups.items():
+    print(grade, ":", names)
