@@ -1,0 +1,19 @@
+books = {"Python": 3, "Java": 2}
+
+def issue_book(book):
+    if books.get(book, 0) > 0:
+        books[book] -= 1
+        print(book, "issued")
+    else:
+        print(book, "not available")
+
+def return_book(book):
+    books[book] = books.get(book, 0) + 1
+    print(book, "returned")
+
+issue_book("Python")
+return_book("Python")
+
+with open("library.txt", "w") as file:
+    for book, count in books.items():
+        file.write(f"{book},{count}\n")
