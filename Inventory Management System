@@ -1,0 +1,17 @@
+inventory = {}
+
+def add_item(name, qty):
+    inventory[name] = qty
+
+def update_item(name, qty):
+    inventory[name] = qty
+
+def delete_item(name):
+    if name in inventory:
+        del inventory[name]
+
+add_item("Pen", 50)
+update_item("Pen", 100)
+delete_item("Pen")
+
+print(inventory)
