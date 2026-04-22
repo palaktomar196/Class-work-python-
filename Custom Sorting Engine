@@ -1,0 +1,22 @@
+students = [
+    ("Amit", 85, 20),
+    ("Riya", 90, 22),
+    ("Neha", 90, 19),
+    ("Raj", 80, 21)
+]
+
+n = len(students)
+
+for i in range(n):
+    for j in range(i + 1, n):
+
+        if students[i][1] < students[j][1]:
+            students[i], students[j] = students[j], students[i]
+
+        elif students[i][1] == students[j][1]:
+            if students[i][2] > students[j][2]:
+                students[i], students[j] = students[j], students[i]
+
+print("Sorted List:")
+for student in students:
+    print(student)
